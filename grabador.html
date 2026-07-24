@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grabador de Pantalla Simple</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            text-align: center;
+            max-width: 400px;
+        }
+        h1 { margin-top: 0; font-size: 1.5rem; }
+        p { color: #4b5563; margin-bottom: 2rem; }
+        button {
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin: 0.5rem;
+        }
+        #startBtn { background-color: #2563eb; color: white; }
+        #startBtn:hover { background-color: #1d4ed8; }
+        #stopBtn { background-color: #dc2626; color: white; display: none; }
+        #stopBtn:hover { background-color: #b91c1c; }
+        #status { margin-top: 1rem; font-weight: bold; color: #dc2626; animation: pulse 1.5s infinite; display: none; }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Grabador de Pantalla 🎥</h1>
+        <p>Haz clic en iniciar, selecciona la pestaña de tu web (localhost:3000) y graba la animación.</p>
+        
+        <button id="startBtn">🔴 Iniciar Grabación</button>
+        <button id="stopBtn">⏹️ Detener y Guardar</button>
+        
+        <div id="status">Grabando...</div>
+    </div>
+
+    <script>
+        let mediaRecorder;
+        let recordedChunks = [];
+
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const statusEl = document.getElementById('status');
+
+        startBtn.addEventListener('click', async () => {
+            try {
+                // Solicitar acceso a la pantalla
+                const stream = await navigator.mediaDevices.getDisplayMedia({
+                    video: { cursor: "always" },
+                    audio: false
+                });
+
+                // Configurar el grabador (formato webm es universal en navegadores)
+                mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+
+                mediaRecorder.ondataavailable = function(e) {
+                    if (e.data.size > 0) {
+                        recordedChunks.push(e.data);
+                    }
+                };
+
+                mediaRecorder.onstop = function() {
+                    // Crear el archivo de video al detener
+                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                    const url = URL.createObjectURL(blob);
+                    
+                    // Descargar automáticamente
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'grabacion_apyme.webm';
+                    document.body.appendChild(a);
+                    a.click();
+                    
+                    // Limpieza
+                    window.URL.revokeObjectURL(url);
+                    recordedChunks = [];
+                    resetUI();
+                };
+
+                // Si el usuario detiene compartición desde el botón nativo de Chrome
+                stream.getVideoTracks()[0].onended = () => {
+                    if(mediaRecorder.state !== "inactive") mediaRecorder.stop();
+                };
+
+                mediaRecorder.start();
+
+                // Cambiar UI
+                startBtn.style.display = 'none';
+                stopBtn.style.display = 'inline-block';
+                statusEl.style.display = 'block';
+
+            } catch (err) {
+                console.error("Error: " + err);
+                alert("Debes dar permiso para grabar la pantalla.");
+            }
+        });
+
+        stopBtn.addEventListener('click', () => {
+            if(mediaRecorder && mediaRecorder.state !== "inactive") {
+                mediaRecorder.stop();
+                // Detener todas las pistas de la cámara/pantalla
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
+            }
+        });
+
+        function resetUI() {
+            startBtn.style.display = 'inline-block';
+            stopBtn.style.display = 'none';
+            statusEl.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
