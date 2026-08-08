@@ -96,7 +96,7 @@ function LogoScene() {
         {/* Primer cubo (Rojo - Mirror Glaze) */}
         <FloatingGeometry
           geometryType="cube"
-          textureUrl="/textura_roja.png"
+          textureUrl="/textura_roja_sm.jpg"
           position={[-0.55, 0.5, 0]}
           floatSpeed={0.9}
           floatAmplitude={0.18}
@@ -108,7 +108,7 @@ function LogoScene() {
         {/* Cubo Plateado (Brushed Metal) */}
         <FloatingGeometry
           geometryType="cube"
-          textureUrl="/textura_plateada.png"
+          textureUrl="/textura_plateada_sm.jpg"
           position={[0.55, 0.6, -0.3]}
           floatSpeed={1.1}
           floatAmplitude={0.14}
@@ -120,7 +120,7 @@ function LogoScene() {
         {/* Segundo cubo (Rojo - Mirror Glaze) */}
         <FloatingGeometry
           geometryType="cube"
-          textureUrl="/textura_roja.png"
+          textureUrl="/textura_roja_sm.jpg"
           position={[0.45, -0.45, 0.2]}
           floatSpeed={0.8}
           floatAmplitude={0.2}
