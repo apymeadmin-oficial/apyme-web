@@ -41,17 +41,65 @@ const photos = [
     caption: "Presidente de apyme chile en el palacio de la moneda representando a los gremios productivos del pais durante la conmemoracion delos 50 años de democracia",
   },
   {
-    src: "/fotos/Programa Piloto del Gobierno Regional 2.jfif",
-    caption: "Programa Piloto del Gobierno Regional 2",
-  },
-  {
-    src: "/fotos/Programa Piloto del Gobierno Regional.jfif",
-    caption: "Programa Piloto del Gobierno Regional",
-  },
-  {
     src: "/fotos/segundo circulo empresarial.jfif",
     caption: "segundo circulo empresarial",
   },
+  {
+    src: "/fotos/foto 1.jpeg",
+    caption: "mesa de reactivacion economica por pandemia",
+    href: "https://www.latercera.com/pulso/noticia/tras-cita-con-grandes-empresarios-pinera-se-reune-con-gremio-pyme-para-afinar-plan-paso-a-paso/WWAV4PVRD5EOJAA3K7ZAXBOOFA/"
+  },
+  {
+    src: "/fotos/foto 2.jpeg",
+    caption: "mesa de reactivacion economica por pandemia",
+    href: "https://www.latercera.com/pulso/noticia/tras-cita-con-grandes-empresarios-pinera-se-reune-con-gremio-pyme-para-afinar-plan-paso-a-paso/WWAV4PVRD5EOJAA3K7ZAXBOOFA/"
+  },
+  {
+    src: "/fotos/foto 3.jpeg",
+    caption: "",
+    href: "https://www.elmostrador.cl/noticias/pais/2022/07/22/voceros-y-dirigentes-de-chile-vamos-el-verdadero-rostro-de-las-organizaciones-civiles-del-comando-por-el-rechazo/"
+  },
+  {
+    src: "/fotos/foto 4.jpeg",
+    caption: "",
+    href: "https://www.elmostrador.cl/noticias/pais/2022/07/22/voceros-y-dirigentes-de-chile-vamos-el-verdadero-rostro-de-las-organizaciones-civiles-del-comando-por-el-rechazo/"
+  },
+  {
+    src: "/fotos/foto 5.jpeg",
+    caption: "",
+    href: "https://www.elmostrador.cl/noticias/pais/2022/07/22/voceros-y-dirigentes-de-chile-vamos-el-verdadero-rostro-de-las-organizaciones-civiles-del-comando-por-el-rechazo/"
+  },
+  {
+    src: "/fotos/foto 6.jpeg",
+    caption: "",
+    href: "https://www.elmostrador.cl/noticias/pais/2022/07/22/voceros-y-dirigentes-de-chile-vamos-el-verdadero-rostro-de-las-organizaciones-civiles-del-comando-por-el-rechazo/"
+  },
+  {
+    src: "/fotos/foto 7.jpeg",
+    caption: "",
+    href: "https://www.elmostrador.cl/noticias/pais/2022/07/22/voceros-y-dirigentes-de-chile-vamos-el-verdadero-rostro-de-las-organizaciones-civiles-del-comando-por-el-rechazo/"
+  },
+  {
+    src: "/fotos/foto 8.jpeg",
+    caption: "",
+    href: "https://www.elmostrador.cl/noticias/pais/2022/07/22/voceros-y-dirigentes-de-chile-vamos-el-verdadero-rostro-de-las-organizaciones-civiles-del-comando-por-el-rechazo/"
+  },
+  {
+    src: "/fotos/WhatsApp Image 2026-08-06 at 4.02.04 PM (3).jpeg",
+    caption: "",
+  },
+  {
+    src: "/fotos/WhatsApp Image 2026-08-06 at 4.02.04 PM (4).jpeg",
+    caption: "",
+  },
+  {
+    src: "/fotos/WhatsApp Image 2026-08-06 at 4.02.04 PM.jpeg",
+    caption: "",
+  },
+  {
+    src: "/fotos/WhatsApp Image 2026-08-06 at 4.02.05 PM.jpeg",
+    caption: "",
+  }
 ]
 
 export function PhotoCarousel() {
@@ -125,22 +173,24 @@ export function PhotoCarousel() {
                           alt={photo.caption} 
                           className={`object-cover w-full h-full ${photo.href && photo.type !== 'video' ? 'group-hover:scale-105 transition-transform duration-700' : ''}`}
                         />
-                        <div className="hidden md:block absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pt-12 z-10 pointer-events-none">
-                          <p className={`text-center font-medium text-lg md:text-xl drop-shadow-md transition-colors ${(photo.href && photo.type !== 'video') ? 'text-red-300 group-hover:text-red-400 group-hover:underline' : 'text-white'}`}>
-                            {photo.caption}
-                            {(photo.href && photo.type !== 'video') && <span className="inline-block ml-2 text-sm opacity-80">↗</span>}
-                            {photo.type === "video" && (
-                              <a 
-                                href={photo.href} 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className="block mt-1 text-sm text-red-400 hover:text-red-300 pointer-events-auto underline"
-                              >
-                                Ver en YouTube ↗
-                              </a>
-                            )}
-                          </p>
-                        </div>
+                        {photo.caption && (
+                          <div className="hidden md:block absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pt-12 z-10 pointer-events-none">
+                            <p className={`text-center font-medium text-lg md:text-xl drop-shadow-md transition-colors ${(photo.href && photo.type !== 'video') ? 'text-red-300 group-hover:text-red-400 group-hover:underline' : 'text-white'}`}>
+                              {photo.caption}
+                              {(photo.href && photo.type !== 'video') && <span className="inline-block ml-2 text-sm opacity-80">↗</span>}
+                              {photo.type === "video" && (
+                                <a 
+                                  href={photo.href} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer" 
+                                  className="block mt-1 text-sm text-red-400 hover:text-red-300 pointer-events-auto underline"
+                                >
+                                  Ver en YouTube ↗
+                                </a>
+                              )}
+                            </p>
+                          </div>
+                        )}
                       </>
                     )}
                   </div>
