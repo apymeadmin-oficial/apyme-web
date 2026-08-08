@@ -50,11 +50,6 @@ const photos = [
     href: "https://www.latercera.com/pulso/noticia/tras-cita-con-grandes-empresarios-pinera-se-reune-con-gremio-pyme-para-afinar-plan-paso-a-paso/WWAV4PVRD5EOJAA3K7ZAXBOOFA/"
   },
   {
-    src: "/fotos/foto 2.jpeg",
-    caption: "mesa de reactivacion economica por pandemia",
-    href: "https://www.latercera.com/pulso/noticia/tras-cita-con-grandes-empresarios-pinera-se-reune-con-gremio-pyme-para-afinar-plan-paso-a-paso/WWAV4PVRD5EOJAA3K7ZAXBOOFA/"
-  },
-  {
     src: "/fotos/foto 3.jpeg",
     caption: "",
     href: "https://www.elmostrador.cl/noticias/pais/2022/07/22/voceros-y-dirigentes-de-chile-vamos-el-verdadero-rostro-de-las-organizaciones-civiles-del-comando-por-el-rechazo/"
