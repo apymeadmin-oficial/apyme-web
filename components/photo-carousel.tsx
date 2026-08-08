@@ -130,7 +130,7 @@ export function PhotoCarousel() {
             {photos.map((photo, index) => (
               <CarouselItem key={index}>
                 <div className="p-1">
-                  <div className="group overflow-hidden rounded-2xl border border-gray-200 bg-black shadow-xl relative aspect-video flex items-center justify-center">
+                  <div className="group overflow-hidden rounded-2xl border border-gray-200 bg-gray-100 shadow-xl relative aspect-video flex items-center justify-center">
                     
                     {photo.type === "video" && playingVideoIndex === index ? (
                       <iframe 
@@ -171,7 +171,7 @@ export function PhotoCarousel() {
                         <img 
                           src={photo.src} 
                           alt={photo.caption} 
-                          className={`object-cover w-full h-full ${photo.href && photo.type !== 'video' ? 'group-hover:scale-105 transition-transform duration-700' : ''}`}
+                          className={`object-contain w-full h-full ${photo.href && photo.type !== 'video' ? 'group-hover:scale-105 transition-transform duration-700' : ''}`}
                         />
                         {photo.caption && (
                           <div className="hidden md:block absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pt-12 z-10 pointer-events-none">
